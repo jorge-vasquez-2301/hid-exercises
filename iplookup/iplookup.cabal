@@ -1,0 +1,121 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.4.
+--
+-- see: https://github.com/sol/hpack
+
+name:           iplookup
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/iplookup#readme>
+homepage:       https://github.com/githubuser/iplookup#readme
+bug-reports:    https://github.com/githubuser/iplookup/issues
+author:         Author name here
+maintainer:     example@example.com
+copyright:      2021 Author name here
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+data-files:
+    data/benchmarks/1.iprs
+    data/benchmarks/2.iprs
+    data/benchmarks/3.iprs
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/iplookup
+
+library
+  exposed-modules:
+      GenIP
+      IPTypes
+      LookupIP
+      ParseIP
+  other-modules:
+      Paths_iplookup
+  hs-source-dirs:
+      src
+  default-extensions:
+      DeriveAnyClass
+      OverloadedStrings
+      TypeApplications
+  build-depends:
+      base >=4.7 && <5
+    , exceptions
+    , extra
+    , hedgehog
+    , text
+  default-language: Haskell2010
+
+executable iplookup-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_iplookup
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , exceptions
+    , iplookup
+    , optparse-applicative
+  default-language: Haskell2010
+
+test-suite iplookup-doctests
+  type: exitcode-stdio-1.0
+  main-is: Doctests.hs
+  other-modules:
+      Paths_iplookup
+  hs-source-dirs:
+      doctest
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , doctest
+  default-language: Haskell2010
+
+test-suite iplookup-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      GoldenTests
+      LookupIPSpec
+      ParseIPSpec
+      Props
+      Paths_iplookup
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , filepath
+    , hedgehog
+    , iplookup
+    , tasty
+    , tasty-golden
+    , tasty-hedgehog
+    , tasty-hspec
+  default-language: Haskell2010
+
+benchmark iplookup-bench
+  type: exitcode-stdio-1.0
+  main-is: Bench.hs
+  other-modules:
+      BenchBuildIP
+      BenchBuildIPGroups
+      BenchLookupIP
+      BenchParseIP
+      BenchRanges
+      Data
+      NFUtils
+      Paths_iplookup
+  hs-source-dirs:
+      benchmarks
+  build-depends:
+      base >=4.7 && <5
+    , criterion >=1.4 && <1.6
+    , deepseq >=1.3 && <1.5
+    , iplookup
+  default-language: Haskell2010
